@@ -21,7 +21,13 @@ const RemoveFeedDialog = ({ open, onClose, feedId }: Props) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} title="Remove feed" confirmButtonText="Yes, remove" onSubmit={onSubmit}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      title="Remove feed"
+      confirmButtonText="Yes, remove"
+      isSubmitButtonDisabled={!feedId}
+      onSubmit={onSubmit}>
       <p>Are you sure you want to remove this feed? This action cannot be undone.</p>
     </Dialog>
   );

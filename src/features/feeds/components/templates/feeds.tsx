@@ -11,8 +11,8 @@ import { useDialog } from '@/hooks/use-dialog';
 import { useFeedStore } from '@/store/feed-store';
 
 import Feed, { FeedPayload } from '../molecules/feed';
-import RemoveFeedDialog from '../organisms/dialogs/remove-feed-dialog';
-import UpdateFeedDialog from '../organisms/dialogs/update-feed-dialog';
+import RemoveFeedDialog from '../organisms/dialogs/remove-feed-dialog/remove-feed-dialog';
+import UpdateFeedDialog from '../organisms/dialogs/update-feed-dialog/update-feed-dialog';
 import FeedsPageHeaderActions from '../organisms/feeds-page-header-actions';
 
 const FeedsList = () => {

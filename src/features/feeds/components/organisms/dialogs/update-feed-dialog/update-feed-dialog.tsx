@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input';
 import { useFeedStore } from '@/store/feed-store';
 
 const validationSchema = z.object({
-  title: z.string().min(1, 'This field is required'),
+  title: z.string().min(1, { message: 'This field is required' }),
   description: z.string(),
 });
 

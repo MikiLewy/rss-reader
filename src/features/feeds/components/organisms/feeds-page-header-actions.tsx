@@ -3,7 +3,7 @@
 import { Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import CreateFeedDialog from '@/features/feeds/components/organisms/dialogs/create-feed-dialog';
+import CreateFeedDialog from '@/features/feeds/components/organisms/dialogs/create-feed-dialog/create-feed-dialog';
 import { useDialog } from '@/hooks/use-dialog';
 
 const FeedsPageHeaderActions = () => {
