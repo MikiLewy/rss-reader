@@ -6,13 +6,13 @@ import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
 
-import { getRssFeed } from '@/api/lib/rss';
 import Dialog, { DialogActions } from '@/components/organisms/dialog';
 import { FormMessage } from '@/components/ui/form';
 import { FormControl } from '@/components/ui/form';
 import { FormItem, FormLabel } from '@/components/ui/form';
 import { FormField } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { parseRssFeed } from '@/server/actions/parse-rss-feed';
 import { useFeedStore } from '@/store/feed-store';
 
 const validationSchema = z.object({
@@ -38,7 +38,7 @@ const CreateFeedDialog = ({ open, onClose }: DialogActions) => {
 
   const onSubmit = async (values: FormValues) => {
     try {
-      const data = await getRssFeed(values.feedUrl);
+      const data = await parseRssFeed(values.feedUrl);
 
       const { title, description, link, items, image } = data;
 
