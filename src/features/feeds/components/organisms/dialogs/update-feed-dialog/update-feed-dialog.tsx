@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
@@ -21,11 +20,6 @@ const validationSchema = z.object({
 
 type FormValues = z.infer<typeof validationSchema>;
 
-const defaultValues: FormValues = {
-  title: '',
-  description: '',
-};
-
 interface Props extends DialogActions {
   feedId: string;
   selectedFeedTitle: string;
@@ -35,11 +29,22 @@ interface Props extends DialogActions {
 const UpdateFeedDialog = ({ open, onClose, feedId, selectedFeedTitle, selectedFeedDescription }: Props) => {
   const updateFeed = useFeedStore(state => state.updateFeed);
 
+  const defaultValues: FormValues = {
+    title: selectedFeedTitle || '',
+    description: selectedFeedDescription || '',
+  };
+
   const form = useForm<FormValues>({
     defaultValues,
     mode: 'onChange',
     resolver: zodResolver(validationSchema),
+    values: defaultValues,
   });
+
+  const handleClose = () => {
+    onClose?.();
+    form.reset(defaultValues);
+  };
 
   const onSubmit = (values: FormValues) => {
     updateFeed({
@@ -48,21 +53,10 @@ const UpdateFeedDialog = ({ open, onClose, feedId, selectedFeedTitle, selectedFe
       description: values.description,
     });
 
-    onClose?.();
+    handleClose();
 
     toast.success('Feed updated successfully');
   };
-
-  useEffect(() => {
-    if (open) {
-      form.reset({
-        title: selectedFeedTitle || defaultValues.title,
-        description: selectedFeedDescription || defaultValues.description,
-      });
-    } else {
-      form.reset(defaultValues);
-    }
-  }, [open]);
 
   return (
     <Dialog

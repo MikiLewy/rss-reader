@@ -1,7 +1,7 @@
 'use client';
 
 import { Newspaper } from 'lucide-react';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import ActionsMenu from '@/components/atoms/actions-menu';
 import ResultsCount from '@/components/atoms/results-count';
@@ -20,9 +20,7 @@ const FeedsList = () => {
 
   const [query, setQuery] = useState('');
 
-  const filteredFeeds = useMemo(() => {
-    return feeds.filter(feed => feed.title.toLowerCase().includes(query.toLowerCase()));
-  }, [feeds, query]);
+  const filteredFeeds = feeds.filter(feed => feed.title.toLowerCase().includes(query.toLowerCase()));
 
   const [isOpenRemoveFeedDialog, handleOpenRemoveFeedDialog, handleCloseRemoveFeedDialog] = useDialog();
 

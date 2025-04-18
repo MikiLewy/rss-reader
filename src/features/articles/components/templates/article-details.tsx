@@ -35,6 +35,10 @@ const ArticleDetails = ({ articleId }: Props) => {
     return <DataUnavailable title="Feed not found" />;
   }
 
+  const handleMarkAsRead = () => {
+    updateFeedReadArticle(article?.id || '', !article?.alreadyRead);
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <Breadcrumb>
@@ -54,7 +58,7 @@ const ArticleDetails = ({ articleId }: Props) => {
       </Breadcrumb>
       <PageHeader title={article?.title || ''}>
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
-          <Button onClick={() => updateFeedReadArticle(article?.id || '', !article?.alreadyRead)} variant="outline">
+          <Button onClick={handleMarkAsRead} variant="outline">
             {article?.alreadyRead ? 'Mark as unread' : 'Mark as read'}
           </Button>
           <Button asChild variant="outline">
